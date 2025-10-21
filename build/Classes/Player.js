@@ -16,11 +16,15 @@ var __extends = (this && this.__extends) || (function () {
 import { GameObject } from "./GameObject.js";
 import { Assets } from "./Assets.js";
 import { Input } from "./Input.js";
+import { Laser } from "./Laser.js";
+import { Alien } from "./Alien.js";
 var Player = /** @class */ (function (_super) {
     __extends(Player, _super);
     function Player() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.speed = 10;
+        _this.timestampShoot = 0;
+        _this.shootingdelay = 200;
         return _this;
     }
     Player.prototype.start = function () {
@@ -31,12 +35,21 @@ var Player = /** @class */ (function (_super) {
         });
     };
     Player.prototype.update = function () {
-        console.log(this.getPosition());
-        console.log(Input.getAxisX());
+        // console.log(this.getPosition());
+        // console.log(Input.getAxisX());
         this.setPosition({
             x: this.getPosition().x += this.speed * Input.getAxisX(),
             y: this.getPosition().y
         });
+        if (Input.getIsShooting() && Date.now() - this.timestampShoot > this.shootingdelay) {
+            this.getGame().instanciate(new Laser(this.getGame()));
+            this.timestampShoot = Date.now();
+        }
+    };
+    Player.prototype.collide = function (other) {
+        console.log("Player collide");
+        if (other instanceof Alien) {
+        }
     };
     return Player;
 }(GameObject));

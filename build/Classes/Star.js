@@ -15,33 +15,24 @@ var __extends = (this && this.__extends) || (function () {
 })();
 import { Assets } from "./Assets.js";
 import { GameObject } from "./GameObject.js";
-import { Player } from "./Player.js";
-var Alien = /** @class */ (function (_super) {
-    __extends(Alien, _super);
-    function Alien() {
-        var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.speed = 1;
-        return _this;
+var Star = /** @class */ (function (_super) {
+    __extends(Star, _super);
+    function Star() {
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    Alien.prototype.start = function () {
-        this.setImage(Assets.getAlienImage());
+    Star.prototype.start = function () {
+        this.setImage(Assets.getStarImage());
         this.setPosition({
             x: Math.random() * this.getGame().CANVAS_WIDTH,
-            y: Math.random() * this.getGame().CANVAS_HEIGHT / 4 - 50,
+            y: Math.random() * this.getGame().CANVAS_HEIGHT
         });
     };
-    Alien.prototype.update = function () {
+    Star.prototype.update = function () {
         this.setPosition({
             x: this.getPosition().x,
-            y: this.getPosition().y += this.speed
+            y: this.getPosition().y
         });
     };
-    Alien.prototype.collide = function (other) {
-        if (other instanceof Player) {
-            console.log("Miam Miam !");
-            this.getGame().over();
-        }
-    };
-    return Alien;
+    return Star;
 }(GameObject));
-export { Alien };
+export { Star };

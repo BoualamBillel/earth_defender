@@ -14,34 +14,38 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 import { Assets } from "./Assets.js";
+import { Alien } from "./Alien.js";
 import { GameObject } from "./GameObject.js";
-import { Player } from "./Player.js";
-var Alien = /** @class */ (function (_super) {
-    __extends(Alien, _super);
-    function Alien() {
+var Laser = /** @class */ (function (_super) {
+    __extends(Laser, _super);
+    function Laser() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
-        _this.speed = 1;
+        _this.speed = 10;
         return _this;
     }
-    Alien.prototype.start = function () {
-        this.setImage(Assets.getAlienImage());
+    Laser.prototype.start = function () {
+        this.setImage(Assets.getLaserImage());
+        var playerPos = this.getGame().getPlayer().getPosition();
         this.setPosition({
-            x: Math.random() * this.getGame().CANVAS_WIDTH,
-            y: Math.random() * this.getGame().CANVAS_HEIGHT / 4 - 50,
+            x: playerPos.x,
+            y: playerPos.y - this.getImage().height
         });
     };
-    Alien.prototype.update = function () {
+    Laser.prototype.update = function () {
         this.setPosition({
             x: this.getPosition().x,
-            y: this.getPosition().y += this.speed
+            y: this.getPosition().y - this.speed
         });
-    };
-    Alien.prototype.collide = function (other) {
-        if (other instanceof Player) {
-            console.log("Miam Miam !");
-            this.getGame().over();
+        if (this.getPosition().y < 0) {
+            this.getGame().destroy(this);
         }
     };
-    return Alien;
+    Laser.prototype.collide = function (other) {
+        if (other instanceof Alien) {
+            console.log("Hit");
+            this.getGame().destroy(other);
+        }
+    };
+    return Laser;
 }(GameObject));
-export { Alien };
+export { Laser };

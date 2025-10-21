@@ -4,6 +4,9 @@ var Input = /** @class */ (function () {
     Input.getAxisX = function () {
         return this.axisX;
     };
+    Input.getIsShooting = function () {
+        return Input.isShooting;
+    };
     Input.listen = function () {
         var _this = this;
         // Sur appuie
@@ -19,6 +22,10 @@ var Input = /** @class */ (function () {
                 case "d":
                     _this.axisX = 1;
                     break;
+                // Tir un laser
+                case " ":
+                    Input.isShooting = true;
+                    break;
                 default:
                     break;
             }
@@ -32,6 +39,8 @@ var Input = /** @class */ (function () {
                     case "D":
                         _this.axisX = 0;
                         break;
+                    case " ":
+                        Input.isShooting = false;
                     default:
                         break;
                 }
@@ -39,6 +48,7 @@ var Input = /** @class */ (function () {
         });
     };
     Input.axisX = 0;
+    Input.isShooting = false;
     return Input;
 }());
 export { Input };

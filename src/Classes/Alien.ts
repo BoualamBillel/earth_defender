@@ -1,5 +1,6 @@
 import { Assets } from "./Assets.js";
 import { GameObject } from "./GameObject.js";
+import { Player } from "./Player.js";
 
 export class Alien extends GameObject {
     private speed : number = 1;
@@ -17,6 +18,13 @@ export class Alien extends GameObject {
         this.setPosition({
             x : this.getPosition().x,
             y : this.getPosition().y += this.speed
-        })
+        });
+    }
+
+    protected collide (other : GameObject) : void {
+        if (other instanceof Player) {
+            console.log("Miam Miam !")
+            this.getGame().over();
+        }
     }
 }

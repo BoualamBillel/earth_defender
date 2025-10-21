@@ -1,8 +1,13 @@
 export class Input {
 
     private static axisX: Direction = 0;
+    private static isShooting : boolean = false;
+
     public static getAxisX(): Direction {
         return this.axisX;
+    }
+    public static getIsShooting() : boolean {
+        return Input.isShooting;
     }
     public static listen() {
         // Sur appuie
@@ -18,6 +23,10 @@ export class Input {
                 case "d":
                     this.axisX = 1;
                     break;
+                // Tir un laser
+                case " ":
+                    Input.isShooting = true;
+                    break;
                 default:
                     break;
             }
@@ -31,6 +40,8 @@ export class Input {
                 case "D":
                     this.axisX = 0;
                     break;
+                case " ":
+                    Input.isShooting = false;
             
                 default:
                     break;

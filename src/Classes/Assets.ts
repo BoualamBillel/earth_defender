@@ -8,18 +8,34 @@ export class Assets {
     }
 
     public static getPlayerImage() {
-        const image : HTMLImageElement = document.querySelector("img#asset_player");
+        const image: HTMLImageElement = document.querySelector("img#asset_player");
         if (image == null) {
-            throw Error ("No assets found");
+            throw Error("No assets found");
         }
         return image;
-     }
+    }
 
-     public static getAlienImage() {
-        const image : HTMLImageElement = document.querySelector("img#asset_alien");
-         if (image == null) {
-            throw Error ("No assets found");
+    public static getAlienImage() {
+        const image: HTMLImageElement = document.querySelector("img#asset_alien");
+        if (image == null) {
+            throw Error("No assets found");
         }
         return image;
-     }
+    }
+
+    public static getStarImage() {
+        const image: HTMLImageElement = document.querySelector("img#asset_star");
+        if (image == null) {
+            throw Error("No assets found");
+        }
+        return image;
+    }
+
+    public static getLaserImage() {
+        const image: HTMLImageElement = document.querySelector("img#asset_laser");
+        if (image == null) {
+            throw Error("No assets found");
+        }
+        return image;
+    }
 }
